@@ -3,8 +3,9 @@ var saturnImage, uranusImage, neptuneImage, venusImage, earthImage, jupiterImage
 var gameState=null;
 var cover, intro,rect;
 var introImage, coverImage;
+var sunhint, saturnhint, uranushint, neptunehint, venushint, earthhint, jupiterhint, marshint, mercuryhint;
+var sunhintImage, saturnhintImage, uranushintImage, neptunehintImage, venushintImage, earthhintImage, jupiterhintImage, marshintImage, mercuryhintImage;
 function preload(){
-  sunImage= loadImage("ussun.png")
   saturnImage= loadImage("ussaturn.png")
   uranusImage= loadImage("usuranus.png")
   neptuneImage= loadImage("usneptune.png")
@@ -15,12 +16,16 @@ function preload(){
   mercuryImage= loadImage("usmercury.png")
   moonImage= loadImage("usmoon.png")
   lockImage= loadImage("uslock.png")
-  sunImage= loadImage("ussun.png")
+  sunImage= loadImage("usesun.png")
   startImage= loadImage("usstart.png")
   galaxyImage= loadImage("usgalaxy.jpg")
   introImage= loadImage("speech.png")
   coverImage= loadImage("usstart.png")
   lockImage= loadImage("uslock.png")
+  sunhintImage=loadImage("sunhint.png")
+  saturnhintImage=loadImage("saturnhint.png")
+  uranushintImage=loadImage("uranushint.png")
+  mercuryhintImage=loadImage("mercuryhint.png")
 }
 function setup() {
   createCanvas( windowWidth, windowHeight);
@@ -30,42 +35,42 @@ function setup() {
   sun.scale=1.2
   sun.visible=false
 
-  saturn=createSprite(width/1.1-width/2,height/2+800,50,50)
+  saturn=createSprite(width/1.1-width/2,height/2+1400,50,50)
   saturn.addImage("sa",saturnImage)
   saturn.scale=.3
   saturn.visible=false
 
-  uranus=createSprite(width/1.17-width/2,height/2+960,50,50)
+  uranus=createSprite(width/1.17-width/2,height/2+1700,50,50)
   uranus.addImage("ur",uranusImage)
   uranus.scale=.2
 uranus.visible=false
 
-  neptune=createSprite(width/.95-width/2,height/2+1060,50,50)
+  neptune=createSprite(width/.95-width/2,height/2+1900,50,50)
   neptune.addImage("ne",neptuneImage)
   neptune.scale=.3
 neptune.visible=false
 
-  venus=createSprite(width/1.2-width/2,height/2+100,50,50)
+  venus=createSprite(width/1.2-width/2,height/2+400,50,50)
   venus.addImage("ve",venusImage)
   venus.scale=.3
   venus.visible=false
 
-  earth=createSprite(width/1.13-width/2,height/2+300,50,50)
+  earth=createSprite(width/1.13-width/2,height/2+650,50,50)
   earth.addImage("ea",earthImage)
   earth.scale=.3
   earth.visible=false
 
-  jupiter=createSprite(width/1.3-width/2,height/2+650,50,50)
+  jupiter=createSprite(width/1.3-width/2,height/2+1050,50,50)
   jupiter.addImage("ju",jupiterImage)
   jupiter.scale=.3
   jupiter.visible=false
 
-  mars=createSprite(width/1-width/2,height/2+460,50,50)
+  mars=createSprite(width/1-width/2,height/2+800,50,50)
   mars.addImage("ma",marsImage)
   mars.scale=.3
   mars.visible=false
 
-  mercury=createSprite(width/1-width/2,height/2-100,50,50)
+  mercury=createSprite(width/1-width/2,height/2+50,50,50)
   mercury.addImage("mer",mercuryImage)
   mercury.scale=.3
   mercury.visible=false
@@ -74,6 +79,26 @@ neptune.visible=false
   moon.addImage("mer",moonImage)
   moon.scale=.7
 moon.visible=true
+
+sunhint=createSprite(width/.75-width/2,height/2-200,50,50)
+sunhint.addImage("suh",sunhintImage)
+sunhint.scale=1
+sunhint.visible=false
+
+saturnhint=createSprite(width/.75-width/2,height/2-200,50,50)
+saturnhint.addImage("sah",saturnhintImage)
+saturnhint.scale=1
+saturnhint.visible=false
+
+uranushint=createSprite(width/.75-width/2,height/2-200,50,50)
+uranushint.addImage("urh",uranushintImage)
+uranushint.scale=1
+uranushint.visible=false
+
+mercuryhint=createSprite(width/.75-width/2,height/2-200,50,50)
+mercuryhint.addImage("meh",mercuryhintImage)
+mercuryhint.scale=1
+mercuryhint.visible=false
 
   rect=createSprite(width/1-width/2,height/2-100,5000,5000)
   rect.shapeColor="red"
@@ -290,12 +315,50 @@ mars.visible=true
 mercury.visible=true
 moon.visible=true
 
+// open the hints
+if(mousePressedOver(sun)){
+sunhint.visible=true
+}
+
+if(mousePressedOver(sunhint)){
+  sunhint.visible=false
+  }
+
+
+  if(mousePressedOver(saturn)){
+    saturnhint.visible=true
+    }
+    
+    if(mousePressedOver(saturnhint)){
+      saturnhint.visible=false
+      }
+
+      if(mousePressedOver(uranus)){
+        uranushint.visible=true
+        }
+        
+        if(mousePressedOver(uranushint)){
+          uranushint.visible=false
+          }
+
+          if(mousePressedOver(mercury)){
+            mercuryhint.visible=true
+            }
+            
+            if(mousePressedOver(mercuryhint)){
+              mercuryhint.visible=false
+              }
+
 // x=-640, y=380 MOON
 // make hints and take pictures of them and once click on the planet show hint.
 fill("red")
 textSize(20)
 text("X- Direction: "+left,width/1.75-width/2,height/2-250)
 text("Y- Direction: "+up,width/1.52-width/2,height/2-250)
+
+fill("white")
+text("Find MOON with hints from planets and once you find it  ",width/.9-width/2,height/2-350)
+text("click on it and go to an adventure of Moon and learn many new things!  ",width/.9-width/2,height/2-330)
    }
  drawSprites();
     

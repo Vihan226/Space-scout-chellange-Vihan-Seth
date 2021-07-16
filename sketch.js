@@ -5,6 +5,12 @@ var cover, intro,rect;
 var introImage, coverImage;
 var sunhint, saturnhint, uranushint, neptunehint, venushint, earthhint, jupiterhint, marshint, mercuryhint;
 var sunhintImage, saturnhintImage, uranushintImage, neptunehintImage, venushintImage, earthhintImage, jupiterhintImage, marshintImage, mercuryhintImage;
+var bgmoonImage;
+var mfloorImage;
+
+var apolloImage, footImage, rocketImage, trioImage;
+var apollo, foot, rocket, trio
+
 function preload(){
   saturnImage= loadImage("ussaturn.png")
   uranusImage= loadImage("usuranus.png")
@@ -26,6 +32,13 @@ function preload(){
   saturnhintImage=loadImage("saturnhint.png")
   uranushintImage=loadImage("uranushint.png")
   mercuryhintImage=loadImage("mercuryhint.png")
+  bgmoonImage=loadImage("bgmoon.jpg")
+  mfloorImage=loadImage("mfloor.jpg")
+
+  apolloImage=loadImage("apollo.jpg")
+  footImage=loadImage("foot.jpg")
+  rocketImage=loadImage("rocket.jpg")
+  trioImage=loadImage("trio.jpg")
 }
 function setup() {
   createCanvas( windowWidth, windowHeight);
@@ -101,19 +114,41 @@ mercuryhint.scale=1
 mercuryhint.visible=false
 
   rect=createSprite(width/1-width/2,height/2-100,5000,5000)
-  rect.shapeColor="red"
+  rect.addImage("bgm", bgmoonImage)
+  rect.scale=.7
 
-  cover=createSprite(width/1-width/2,height/2+100,50,50)
+  apollo=createSprite(width/1-width/2,height/2+200,1000,5000)
+  apollo.addImage("ap", apolloImage)
+  apollo.scale=2
+  apollo.visible=false
+
+  foot=createSprite(width/10-width/.7,height/2+200,1000,5000)
+  foot.addImage("fo", footImage)
+  foot.scale=2
+  foot.visible=false
+
+  rocket=createSprite(width/30-width/.5,height/2+100,1000,5000)
+  rocket.addImage("ro", rocketImage)
+  rocket.scale=2.3
+  rocket.visible=false
+
+  trio=createSprite(width/50-width/.3,height/2-100,1000,5000)
+  trio.addImage("tr", trioImage)
+  trio.scale=2
+  trio.visible=false
+
+  cover=createSprite(width/1.2-width/2,height/2+100,50,50)
   cover.addImage("co",coverImage)
   cover.scale=.6
 
-  intro=createSprite(width/1-width/2,height/2-250,50,50)
+  intro=createSprite(width/1.2-width/2,height/2-250,50,50)
   intro.addImage("in",introImage)
   intro.scale=.9
 
 
   left=0
   up=0
+  hint=0
 }
 
 function draw() {
@@ -151,6 +186,21 @@ function draw() {
   moon.velocityX=0
   moon.velocityY=0
 
+  // moon picutres
+  apollo.velocityX=0
+  apollo.velocityY=0
+
+  foot.velocityX=0
+  foot.velocityY=0
+  
+  rocket.velocityX=0
+  rocket.velocityY=0
+
+  trio.velocityX=0
+  trio.velocityY=0
+
+
+
   if(keyDown("d")){
 
     left++
@@ -186,6 +236,8 @@ function draw() {
 
     moon.velocityX=-5
     moon.velocityY=0
+
+ 
   }
 
   if(keyDown("a")){
@@ -221,6 +273,8 @@ function draw() {
 
     moon.velocityX=5
     moon.velocityY=0
+
+   
   }
 
   if(keyDown("w")){
@@ -318,15 +372,19 @@ moon.visible=true
 // open the hints
 if(mousePressedOver(sun)){
 sunhint.visible=true
+hint=hint+.5
 }
+
 
 if(mousePressedOver(sunhint)){
   sunhint.visible=false
   }
 
 
+
   if(mousePressedOver(saturn)){
     saturnhint.visible=true
+    hint=hint+.5
     }
     
     if(mousePressedOver(saturnhint)){
@@ -335,6 +393,7 @@ if(mousePressedOver(sunhint)){
 
       if(mousePressedOver(uranus)){
         uranushint.visible=true
+        hint=hint+.5
         }
         
         if(mousePressedOver(uranushint)){
@@ -343,22 +402,97 @@ if(mousePressedOver(sunhint)){
 
           if(mousePressedOver(mercury)){
             mercuryhint.visible=true
+            hint=hint+2
             }
             
             if(mousePressedOver(mercuryhint)){
               mercuryhint.visible=false
               }
 
+
+if(hint>20){
+  sunhint.destroy()
+  saturnhint.destroy()
+    uranushint.destroy()
+mercuryhint.destroy()
+  
+hint=0
+}
 // x=-640, y=380 MOON
 // make hints and take pictures of them and once click on the planet show hint.
 fill("red")
 textSize(20)
 text("X- Direction: "+left,width/1.75-width/2,height/2-250)
 text("Y- Direction: "+up,width/1.52-width/2,height/2-250)
+text("Hints used: "+hint,width/1.6-width/2,height/2-210)
 
 fill("white")
 text("Find MOON with hints from planets and once you find it  ",width/.9-width/2,height/2-350)
 text("click on it and go to an adventure of Moon and learn many new things!  ",width/.9-width/2,height/2-330)
+text("You can only use up to 20 hints!  ",width/.9-width/2,height/2-310)
+
+if(mousePressedOver(moon)){
+  gameState="moon"
+}
+   }
+
+   if(gameState==="moon"){
+     background(mfloorImage)
+
+
+     sunhint.destroy()
+     saturnhint.destroy()
+       uranushint.destroy()
+   mercuryhint.destroy()
+   sun.destroy()
+   saturn.destroy()
+   uranus.destroy()
+   neptune.destroy()
+   venus.destroy()
+   earth.destroy()
+   jupiter.destroy()
+   mars.destroy()
+   mercury.destroy()
+   moon.destroy()
+// visible
+apollo.visible=true
+foot.visible=true
+rocket.visible=true
+trio.visible=true
+
+   // done with destroyings
+
+   if(keyDown("d")){
+    apollo.velocityX=-5
+    apollo.velocityY=0
+  
+    foot.velocityX=-5
+    foot.velocityY=0
+    
+    rocket.velocityX=-5
+    rocket.velocityY=0
+  
+    trio.velocityX=-5
+    trio.velocityY=0
+   }
+
+   if(keyDown("a")){
+    apollo.velocityX=5
+    apollo.velocityY=0
+  
+    foot.velocityX=5
+    foot.velocityY=0
+    
+    rocket.velocityX=5
+    rocket.velocityY=0
+  
+    trio.velocityX=5
+    trio.velocityY=0
+   }
+   fill("white")
+   textSize(20)
+   text("You have reached moon. Now you can enjoy the adventure here. Keep going to the left until you see a stop sign",width/1.6-width/2,height/2-350)
+
    }
  drawSprites();
     

@@ -10,6 +10,9 @@ var mfloorImage;
 
 var apolloImage, footImage, rocketImage, trioImage;
 var apollo, foot, rocket, trio
+var rect1;
+var apollolearnImage, footlearnImage, rocketlearnImage, triolearnImage;
+var apollolearn, footlearn, rocketlearn, triolearn; 
 
 function preload(){
   saturnImage= loadImage("ussaturn.png")
@@ -39,6 +42,11 @@ function preload(){
   footImage=loadImage("foot.jpg")
   rocketImage=loadImage("rocket.jpg")
   trioImage=loadImage("trio.jpg")
+
+  apollolearnImage=loadImage("apollolearn.png")
+  footlearnImage=loadImage("footlearn.png")
+  rocketlearnImage=loadImage("rocketlearn.png")
+  triolearnImage=loadImage("triolearn.png")
 }
 function setup() {
   createCanvas( windowWidth, windowHeight);
@@ -132,10 +140,14 @@ mercuryhint.visible=false
   rocket.scale=2.3
   rocket.visible=false
 
-  trio=createSprite(width/50-width/.3,height/2-100,1000,5000)
+  trio=createSprite(width/50-width/.34,height/2-100,1000,5000)
   trio.addImage("tr", trioImage)
   trio.scale=2
   trio.visible=false
+// all the learns at the moon
+ 
+
+
 
   cover=createSprite(width/1.2-width/2,height/2+100,50,50)
   cover.addImage("co",coverImage)
@@ -145,6 +157,29 @@ mercuryhint.visible=false
   intro.addImage("in",introImage)
   intro.scale=.9
 
+  rect1=createSprite(width/.9-width/2,height/2+100,50,50)
+  rect1.shapeColor="red"
+rect1.visible=false
+
+footlearn=createSprite(width/.9-width/2,height/2-100,1000,5000)
+footlearn.addImage("fl", footlearnImage)
+footlearn.scale=1
+footlearn.visible=false
+
+apollolearn=createSprite(width/.9-width/2,height/2-100,1000,5000)
+apollolearn.addImage("al", apollolearnImage)
+apollolearn.scale=1
+apollolearn.visible=false
+
+rocketlearn=createSprite(width/.9-width/2,height/2-100,1000,5000)
+rocketlearn.addImage("rl", rocketlearnImage)
+rocketlearn.scale=1
+rocketlearn.visible=false
+
+triolearn=createSprite(width/.9-width/2,height/2-100,1000,5000)
+triolearn.addImage("tl", triolearnImage)
+triolearn.scale=1
+triolearn.visible=false
 
   left=0
   up=0
@@ -459,6 +494,34 @@ apollo.visible=true
 foot.visible=true
 rocket.visible=true
 trio.visible=true
+
+if(foot.isTouching(rect1)){
+  footlearn.visible=true
+}
+else{
+  footlearn.visible=false
+}
+
+if(apollo.isTouching(rect1)){
+  apollolearn.visible=true
+}
+else{
+  apollolearn.visible=false
+}
+
+if(rocket.isTouching(rect1)){
+  rocketlearn.visible=true
+}
+else{
+  rocketlearn.visible=false
+}
+
+if(trio.isTouching(rect1)){
+  triolearn.visible=true
+}
+else{
+  triolearn.visible=false
+}
 
    // done with destroyings
 

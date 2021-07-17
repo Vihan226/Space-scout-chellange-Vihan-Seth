@@ -573,6 +573,26 @@ else{
    textSize(15)
    text("You have reached moon. Now you can enjoy the adventure here. Keep going to the left until you see the TRIO image, and then click on the LEARN button. And then go back to earth!",width/1.7-width/2,height/2-350)
 
+   test.mousePressed(()=>{
+    gameState="test"
+    
+      })
+   }
+
+   if(gameState==="test"){
+background("green")
+// make everything destroy
+apollo.destroy()
+foot.destroy()
+rocket.destroy()
+trio.destroy()
+apollolearn.destroy()
+footlearn.destroy()
+rocketlearn.destroy()
+triolearn.destroy()
+test.hide()
+
+// continue with the questions
    }
  drawSprites();
     

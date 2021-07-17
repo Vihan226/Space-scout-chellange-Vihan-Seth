@@ -13,6 +13,7 @@ var apollo, foot, rocket, trio
 var rect1;
 var apollolearnImage, footlearnImage, rocketlearnImage, triolearnImage;
 var apollolearn, footlearn, rocketlearn, triolearn; 
+var test;
 
 function preload(){
   saturnImage= loadImage("ussaturn.png")
@@ -51,6 +52,11 @@ function preload(){
 function setup() {
   createCanvas( windowWidth, windowHeight);
   
+  test = createButton('Learn!');
+  test.position(width/1.96-width/2,height/2-480)
+  test.size(100,100)
+test.hide()
+
   sun=createSprite(width/1.1-width/2,height/2-400,50,50)
   sun.addImage("su",sunImage)
   sun.scale=1.2
@@ -233,6 +239,10 @@ function draw() {
 
   trio.velocityX=0
   trio.velocityY=0
+
+  
+  test.velocityX=0
+  test.velocityY=0
 
 
 
@@ -494,6 +504,7 @@ apollo.visible=true
 foot.visible=true
 rocket.visible=true
 trio.visible=true
+test.show()
 
 if(foot.isTouching(rect1)){
   footlearn.visible=true
@@ -537,6 +548,9 @@ else{
   
     trio.velocityX=-5
     trio.velocityY=0
+
+    test.velocityX=-5
+    test.velocityY=0
    }
 
    if(keyDown("a")){
@@ -551,10 +565,13 @@ else{
   
     trio.velocityX=5
     trio.velocityY=0
+
+    test.velocityX=5
+    test.velocityY=0
    }
    fill("white")
-   textSize(20)
-   text("You have reached moon. Now you can enjoy the adventure here. Keep going to the left until you see a stop sign",width/1.6-width/2,height/2-350)
+   textSize(15)
+   text("You have reached moon. Now you can enjoy the adventure here. Keep going to the left until you see the TRIO image, and then click on the LEARN button. And then go back to earth!",width/1.7-width/2,height/2-350)
 
    }
  drawSprites();

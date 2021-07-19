@@ -14,7 +14,7 @@ var rect1;
 var apollolearnImage, footlearnImage, rocketlearnImage, triolearnImage;
 var apollolearn, footlearn, rocketlearn, triolearn; 
 var test;
-var astr, astrImage, reachearth;
+var astr, astrImage, reachearth, para, paraImage, completeImage;
 var big1, big2, big3, big4, big5, big6, big7, big8, big9, big10, big11;
 function preload(){
   saturnImage= loadImage("ussaturn.png")
@@ -50,6 +50,9 @@ function preload(){
   rocketlearnImage=loadImage("rocketlearn.png")
   triolearnImage=loadImage("triolearn.png")
   astrImage=loadImage("useastr.png")
+  paraImage=loadImage("para.png")
+  completeImage=loadImage("complete.png")
+
 }
 function setup() {
   createCanvas( windowWidth, windowHeight);
@@ -196,15 +199,36 @@ astr.addImage("as", astrImage)
 astr.scale=2
 astr.visible=false
 
+para=createSprite(width/1-width/2,height/2+350,1000,5000)
+para.addImage("pa", paraImage)
+para.scale=1
+para.visible=false
+
 // to make reachearth big
 
 
 reachearth=createSprite(width/.9-width/2,height/2-350,50,50)
 reachearth.addImage("rea",earthImage)
 reachearth.scale=.025
-reachearth.visible=true
+reachearth.visible=false
 
-big1=createSprite(width/.9-width/2,height/2-330,50,10)
+big1=createSprite(width/.9-width/2,height/2-330,500000000,10)
+big1.visible=false
+
+big2=createSprite(width/.9-width/2,height/2-310,500000000,10)
+big2.visible=false
+
+big3=createSprite(width/.9-width/2,height/2-280,500000000,10)
+big3.visible=false
+
+big4=createSprite(width/.9-width/2,height/2-250,500000000,10)
+big4.visible=false
+
+big5=createSprite(width/.9-width/2,height/2-150,500000000,10)
+big5.visible=false
+
+big6=createSprite(width/.9-width/2,height/2,500000000,10)
+big6.visible=false
 
   left=0
   up=0
@@ -597,13 +621,13 @@ else{
    text("You have reached moon. Now you can enjoy the adventure here. Keep going to the left until you see the TRIO image, and then click on the GO BACK TO EARTH button!",width/1.7-width/2,height/2-350)
 
    test.mousePressed(()=>{
-    gameState="test"
+    gameState="back"
     
       })
    }
 
-   if(gameState==="test"){
-background("green")
+   if(gameState==="back"){
+background(91,89,89)
 // make everything destroy
 apollo.destroy()
 foot.destroy()
@@ -620,21 +644,60 @@ astr.visible=true
 reachearth.visible=true
 
 reachearth.velocityY=.15
-reachearth.velocityX=0
+reachearth.velocityX=random(-4,4)
 
 if(keyDown("d")){
-  astr.velocityX=-5
-  astr.velocityY=0
+  reachearth.velocityX=-1
+  reachearth.velocityY=0
 }
 
 if(keyDown("a")){
-  astr.velocityX=5
-  astr.velocityY=0
+  reachearth.velocityX=1
+  reachearth.velocityY=0
 }
 
 // make reach earth bug
 if(reachearth.isTouching(big1)){
   reachearth.scale=.050
+  big1.destroy()
+}
+
+if(reachearth.isTouching(big2)){
+  reachearth.scale=.075
+  big2.destroy()
+}
+
+if(reachearth.isTouching(big3)){
+  reachearth.scale=.1
+  big3.destroy()
+}
+
+if(reachearth.isTouching(big4)){
+  reachearth.scale=.15
+  big4.destroy()
+}
+
+if(reachearth.isTouching(big5)){
+  reachearth.scale=.30
+  big5.destroy()
+}
+
+if(reachearth.isTouching(big6)){
+  reachearth.scale=.50
+  big6.destroy()
+  astr.destroy()
+  para.visible=true
+}
+if(reachearth.isTouching(para)){
+  background(completeImage)
+  para.visible=false
+  reachearth.visible=false
+  reachearth.velocityY=0
+  reachearth.velocityX=0
+
+  fill("white")
+textSize(20)
+text("You have complete the game. Hopefully you learned new things about space and planets! ",width/1.75-width/2,height/2-300)
 }
 // continue with the questions
    }

@@ -14,7 +14,8 @@ var rect1;
 var apollolearnImage, footlearnImage, rocketlearnImage, triolearnImage;
 var apollolearn, footlearn, rocketlearn, triolearn; 
 var test;
-
+var astr, astrImage, reachearth;
+var big1, big2, big3, big4, big5, big6, big7, big8, big9, big10, big11;
 function preload(){
   saturnImage= loadImage("ussaturn.png")
   uranusImage= loadImage("usuranus.png")
@@ -48,11 +49,12 @@ function preload(){
   footlearnImage=loadImage("footlearn.png")
   rocketlearnImage=loadImage("rocketlearn.png")
   triolearnImage=loadImage("triolearn.png")
+  astrImage=loadImage("useastr.png")
 }
 function setup() {
   createCanvas( windowWidth, windowHeight);
   
-  test = createButton('Learn!');
+  test = createButton('GO BACK TO EARTH!');
   test.position(width/1.96-width/2,height/2-480)
   test.size(100,100)
 test.hide()
@@ -150,6 +152,8 @@ mercuryhint.visible=false
   trio.addImage("tr", trioImage)
   trio.scale=2
   trio.visible=false
+
+ 
 // all the learns at the moon
  
 
@@ -186,6 +190,21 @@ triolearn=createSprite(width/.9-width/2,height/2-100,1000,5000)
 triolearn.addImage("tl", triolearnImage)
 triolearn.scale=1
 triolearn.visible=false
+
+astr=createSprite(width/1-width/2,height/2+200,1000,5000)
+astr.addImage("as", astrImage)
+astr.scale=2
+astr.visible=false
+
+// to make reachearth big
+
+
+reachearth=createSprite(width/.9-width/2,height/2-350,50,50)
+reachearth.addImage("rea",earthImage)
+reachearth.scale=.025
+reachearth.visible=true
+
+big1=createSprite(width/.9-width/2,height/2-330,50,10)
 
   left=0
   up=0
@@ -243,6 +262,10 @@ function draw() {
   
   test.velocityX=0
   test.velocityY=0
+
+   
+  astr.velocityX=0
+  astr.velocityY=0
 
 
 
@@ -571,7 +594,7 @@ else{
    }
    fill("white")
    textSize(15)
-   text("You have reached moon. Now you can enjoy the adventure here. Keep going to the left until you see the TRIO image, and then click on the LEARN button. And then go back to earth!",width/1.7-width/2,height/2-350)
+   text("You have reached moon. Now you can enjoy the adventure here. Keep going to the left until you see the TRIO image, and then click on the GO BACK TO EARTH button!",width/1.7-width/2,height/2-350)
 
    test.mousePressed(()=>{
     gameState="test"
@@ -592,6 +615,27 @@ rocketlearn.destroy()
 triolearn.destroy()
 test.hide()
 
+// everthing visible
+astr.visible=true
+reachearth.visible=true
+
+reachearth.velocityY=.15
+reachearth.velocityX=0
+
+if(keyDown("d")){
+  astr.velocityX=-5
+  astr.velocityY=0
+}
+
+if(keyDown("a")){
+  astr.velocityX=5
+  astr.velocityY=0
+}
+
+// make reach earth bug
+if(reachearth.isTouching(big1)){
+  reachearth.scale=.050
+}
 // continue with the questions
    }
  drawSprites();
